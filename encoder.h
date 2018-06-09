@@ -34,8 +34,6 @@ SC_MODULE(encoder) {
       for (int i = 0; i < N; ++i) {
         out.write((memory & poly[i]).xor_reduce());
       }
-
-      std::cout << "memory{" << memory << "}\n";
     }
   }
 };

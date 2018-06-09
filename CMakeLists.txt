@@ -15,7 +15,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CXX_WARNINGS "-Weverything -Wno-c++98-compat -Wno-weak-vtables \
         -Wno-missing-noreturn")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    set(CXX_WARNINGS "-Wall -Wextra -Werror -Wpedantic -Wformat=2 \
+    set(CXX_WARNINGS "-Wall -Wextra -Wpedantic -Wformat=2 \
         -Wuninitialized -Wfloat-equal -Wundef -Wshadow -Wcast-qual \
         -Wcast-align -Wconversion -Wuseless-cast -Wlogical-op \
         -Wmissing-declarations -Wredundant-decls -Winline \
@@ -28,6 +28,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS}")
 add_executable(viterbi
         main.cpp
         bit_generator.h
+        decoder.h
         display.h
         encoder.h)
 

@@ -19,6 +19,7 @@ SC_MODULE(display) {
 
   void main() {
     int i = 0;
+
     while (true) {
       std::cout << in.read();
 
