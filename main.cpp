@@ -5,9 +5,7 @@
 
 #include <systemc>
 
-#include "bit_generator.h"
-#include "encoder.h"
-#include "display.h"
+#include "decoder_test.h"
 
 using namespace sc_core;
 using namespace sc_dt;
@@ -17,19 +15,11 @@ using namespace sc_dt;
  * \return the exit code.
  */
 int sc_main(int, char *[]) {
-  sc_fifo<bool> fifo_in;
-  sc_fifo<bool> fifo_out;
+  sc_core::sc_clock clk{"clk", 10, sc_core::SC_NS};
 
-  bit_generator<7> bit_gen("bit_generator", "1011000");
-  bit_gen.out(fifo_in);
+  decoder_test dec_test("dec_test");
+  dec_test.clk(clk);
 
-  encoder<2, 4> encoder("encoder", {"1111", "1101"});
-  encoder.in(fifo_in);
-  encoder.out(fifo_out);
-
-  display display("display");
-  display.in(fifo_out);
-
-  sc_start(100, SC_NS);
+  sc_start(200, SC_NS);
   return 0;
 }
