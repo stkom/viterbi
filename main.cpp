@@ -6,6 +6,7 @@
 #include <systemc>
 
 #include "decoder_test.h"
+#include "encoder_test.h"
 
 using namespace sc_core;
 using namespace sc_dt;
@@ -16,6 +17,8 @@ using namespace sc_dt;
  */
 int sc_main(int, char *[]) {
   sc_core::sc_clock clk{"clk", 10, sc_core::SC_NS};
+
+  encoder_test enc_test("enc_test");
 
   decoder_test dec_test("dec_test");
   dec_test.clk(clk);

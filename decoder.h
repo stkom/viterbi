@@ -1,6 +1,6 @@
 /**
  * \file decoder.h
- * \brief <short description>.
+ * \brief Provides the Viterbi decoder module.
  */
 
 #ifndef VITERBI_DECODER_H
@@ -138,8 +138,8 @@ SC_MODULE(traceback_unit) {
   }
 
   void main() {
-    std::array<bool, 20> result{};
-    std::array<std::array<bool, 8>, 20> arr{};
+    std::array<bool, 32> result{};
+    std::array<std::array<bool, 32>, 32> arr{};
     wait();
 
     unsigned i = 0;
@@ -153,16 +153,25 @@ SC_MODULE(traceback_unit) {
     }
 
     unsigned pos = 0;
+    // int max_metric = pm[0].read();
+    // for (unsigned j = 1; j < num_acs; ++j) {
+    //   int tmp = pm[i].read();
+    //   if (tmp > max_metric) {
+    //     pos = i;
+    //     max_metric = tmp;
+    //   }
+    // }
+
     for (int j = i - 1; j >= 0; --j) {
       trellis_stage<N, M> &stage = trellis[pos];
       unsigned d0 = stage.prev_state0.to_uint();
       unsigned d1 = stage.prev_state1.to_uint();
 
       if (!arr[j][pos]) {
-        result[j] = d0 < 4;
+        result[j] = d0 < num_acs / 2;
         pos = d0;
       } else if (arr[j][pos]) {
-        result[j] = d1 > 3;
+        result[j] = d1 > num_acs / 2 - 1;
         pos = d1;
       } else {
         sc_assert(false);

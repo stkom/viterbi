@@ -1,6 +1,6 @@
 /**
  * \file decoder_test.h
- * \brief <short description>.
+ * \brief Provides the Viterbi decoder test module.
  */
 
 #ifndef VITERBI_DECODER_TEST_H

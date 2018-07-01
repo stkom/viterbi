@@ -27,11 +27,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_WARNINGS}")
 
 add_executable(viterbi
         main.cpp
-        bit_generator.h
         decoder.cpp decoder.h
         decoder_test.cpp decoder_test.h
-        display.h
-        encoder.h)
+        encoder.h
+        encoder_test.cpp encoder_test.h)
 
 if (SystemCLanguage_FOUND)
     target_link_libraries(viterbi SystemC::systemc)

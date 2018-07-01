@@ -1,8 +1,3 @@
-/**
- * \file decoder.cpp
- * \brief <short description>.
- */
-
 #include "decoder.h"
 
 int hamming_distance(unsigned a, unsigned b) {

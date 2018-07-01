@@ -1,8 +1,3 @@
-/**
- * \file decoder_test.cpp
- * \brief <short description>.
- */
-
 #include "decoder_test.h"
 
 decoder_test::decoder_test(const sc_module_name &name) : sc_module(name) {
@@ -16,27 +11,19 @@ decoder_test::decoder_test(const sc_module_name &name) : sc_module(name) {
 }
 
 void decoder_test::main() {
-  dec_in.write("11");
-  wait();
-  dec_in.write("11");
-  wait();
-  dec_in.write("01");
-  wait();
-  dec_in.write("11");
-  wait();
-  dec_in.write("01");
-  wait();
-  dec_in.write("01");
-  wait();
-  dec_in.write("11");
-  wait();
+  const int len = 7;
+  sc_bv<len * 2> input("11110111010111");
+
+  for (int i = 0; i < len; ++i) {
+    dec_in.write(input);
+    input >>= 2;
+    wait();
+  }
 
   dec_trigger.write(true);
-  wait();
-  wait();
-  wait();
-  wait();
-  wait();
+  for (int j = 0; j < 5; ++j) {
+    wait();
+  }
 
   sc_assert(dec_out.num_available() == 7);
 
@@ -46,7 +33,7 @@ void decoder_test::main() {
     result.set_bit(0, dec_out.read());
   }
 
-  sc_assert(result == "1011000");
   std::cout << name() << "->result{" << result << "}\n";
-  std::cout << "[SUCCESS] " << name() << "\n";
+  sc_assert(result == "1011000");
+  std::cout << "[PASSED] " << name() << "\n";
 }
